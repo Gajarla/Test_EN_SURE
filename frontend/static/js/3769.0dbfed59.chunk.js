@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunk_minimal_minimal_kit_react=self.webpackChunk_minimal_minimal_kit_react||[]).push([[3769],{3900:(a,i,t)=>{t.d(i,{A:()=>l});t(65043);var r=t(66734),e=t(70579);const l=(0,r.A)((0,e.jsx)("path",{d:"M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"}),"KeyboardArrowLeft")},51639:(a,i,t)=>{t.d(i,{A:()=>l});t(65043);var r=t(66734),e=t(70579);const l=(0,r.A)((0,e.jsx)("path",{d:"M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"}),"KeyboardArrowRight")}}]);
+//# sourceMappingURL=3769.0dbfed59.chunk.js.map
