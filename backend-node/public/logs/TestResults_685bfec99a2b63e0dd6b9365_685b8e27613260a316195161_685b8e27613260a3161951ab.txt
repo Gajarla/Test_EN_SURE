@@ -1,0 +1,15 @@
+ **TestResults**  685b8e27613260a3161951ac 2025-06-26 10:49:13,420 +0530 [main] INFO  (NavActionImpls.java:2007) - Actual::Clicked on Actions button in headers under call session
+2025-06-26 10:49:13,420 +0530 [main] INFO  (NavActionImpls.java:2008) - Expected::Clicked on Actions button in headers under call session
+2025-06-26 10:49:13,421 +0530 [main] INFO  (NavActionImpls.java:2009) - Clicked on Element found, status : [PASSED] && 685b8e27613260a3161951ad 2025-06-26 10:49:14,521 +0530 [main] INFO  (ValidateActionImpl.java:362) - Actual Value:Validate the Accept option under is displayed Actions button
+2025-06-26 10:49:14,521 +0530 [main] INFO  (ValidateActionImpl.java:363) - Expected Value:Validate the Accept option under is displayed Actions button
+2025-06-26 10:49:14,521 +0530 [main] INFO  (ValidateActionImpl.java:364) - Element is Displayed, status : [PASSED] && 685b8e27613260a3161951ae 2025-06-26 10:49:16,820 +0530 [main] INFO  (NavActionImpls.java:2007) - Actual::Click on Accept option under Actions button in call session
+2025-06-26 10:49:16,820 +0530 [main] INFO  (NavActionImpls.java:2008) - Expected::Click on Accept option under Actions button in call session
+2025-06-26 10:49:16,820 +0530 [main] INFO  (NavActionImpls.java:2009) - Clicked on Element found, status : [PASSED] && 685b8e27613260a3161951af 2025-06-26 10:49:17,864 +0530 [main] INFO  (ValidateActionImpl.java:387) - Actual Value:Validate the  Alert PopUp  message is present
+2025-06-26 10:49:17,864 +0530 [main] INFO  (ValidateActionImpl.java:388) - Expected Value:Validate the  Alert PopUp  message is present
+2025-06-26 10:49:17,864 +0530 [main] INFO  (ValidateActionImpl.java:389) - Element is Present, status : [PASSED] && 685b8e27613260a3161951b0 2025-06-26 10:49:20,104 +0530 [main] INFO  (NavActionImpls.java:2007) - Actual::Click on Yes option in  Alert popup  message
+2025-06-26 10:49:20,104 +0530 [main] INFO  (NavActionImpls.java:2008) - Expected::Click on Yes option in  Alert popup  message
+2025-06-26 10:49:20,105 +0530 [main] INFO  (NavActionImpls.java:2009) - Clicked on Element found, status : [PASSED] && 685b8e27613260a3161951b1 2025-06-26 10:49:22,093 +0530 [main] INFO  (ValidateActionImpl.java:387) - Actual Value:Validate the status changed to Accepted 
+2025-06-26 10:49:22,094 +0530 [main] INFO  (ValidateActionImpl.java:388) - Expected Value:Validate the status changed to Accepted 
+2025-06-26 10:49:22,094 +0530 [main] INFO  (ValidateActionImpl.java:389) - Element is Present, status : [PASSED] && 685b8e27613260a3161951b2 2025-06-26 10:49:25,097 +0530 [main] INFO  (NavActionImpls.java:2007) - Actual::Click on Save and Exit button in Call session
+2025-06-26 10:49:25,097 +0530 [main] INFO  (NavActionImpls.java:2008) - Expected::Click on Save and Exit button in Call session
+2025-06-26 10:49:25,098 +0530 [main] INFO  (NavActionImpls.java:2009) - Clicked on Element found, status : [PASSED] && 

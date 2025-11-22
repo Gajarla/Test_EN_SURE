@@ -1,0 +1,1404 @@
+{
+	"suiteName" : "Procure2Pay",
+	"suiteDescription" : "Procure 2 Pay Suite",
+	"testCases": [
+		{
+			"testNode": {
+				"testCaseID": "PUR_004",
+				"testCaseTitle": "Verify Login with Valid Credentials",
+				"testCaseDescription": "Infor LN Login",
+				"dependsOn": "",
+				"tags":["SmokeTest","P2P","NegativeTest"],
+				"testCaseSteps": [
+				{ "login": { "login_username":"supraja", "login_password":"Sailo@107", "url" : "http://$username:$password@175.101.240.71:8312/webui/servlet/login","testStepDescription" : "Login with valid username and password"}},
+				{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"labelwithText":{"xpathparams":["OK"], "continueTestNodes" : false}},
+									{"then":
+									[
+										{"clickElement" : [{"labelwithText":{"xpathparams": ["OK"]}}]}
+									]
+									}
+								]
+							}
+						]
+					},	
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"menuItem":{"xpathparams":["Infor LN"], "continueTestNodes" : false, "testStepDescription" : "Successfully Logged in and validate Infor LN Menu on the Homepage"}}									
+								]
+							}
+						]
+					}
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_005",
+				"testCaseTitle": "Verify Order Intake Workbench",
+				"testCaseDescription": "Navigate to Purchase Order Intake Workbench",
+				"dependsOn": "PUR_004",
+				"tags":["SmokeTest","P2P","NegativeTest"],
+				"testCaseSteps": [
+					{ "validate": 
+						[ 
+							{ "isDisplayed":
+								[
+									{"menuItem":{"xpathparams":["Infor LN"], "continueTestNodes" : false}},
+									{"else":
+									[
+										{"clickElement" : [{"sideMenu":{"xpathparams": []}}]}
+									]	
+									}
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"menuItem":{"xpathparams": ["Infor LN"], "testStepDescription" : "Click on Infor LN Menu"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"subMenuItem":{"xpathparams":["Infor LN", "Procurement"], "continueTestNodes" : false, "testStepDescription" : "Validate Procurement option is displayed"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"subMenuItem":{"xpathparams": ["Infor LN", "Procurement"], "testStepDescription" : "Click on Procurement under Infor LN"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"subMenuItems":{"xpathparams":["Infor LN", "Procurement", "Orders"], "continueTestNodes" : false, "testStepDescription" : "Validate Orders option is displayed"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"subMenuItems":{"xpathparams": ["Infor LN", "Procurement", "Orders"], "testStepDescription" : "Click on Orders under Procurement"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"subMenuItemChild":{"xpathparams":["Infor LN", "Procurement", "Orders","Order Intake Workbench"], "continueTestNodes" : false, "testStepDescription" : "Validate Order Intake Workbench option is displayed"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"subMenuItemChild":{"xpathparams": ["Infor LN", "Procurement", "Orders","Order Intake Workbench"], "testStepDescription" : "Click on Order Intake Workbench under Orders"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"sessionTab":{"xpathparams":["Purchase Order Intake Workbench"], "continueTestNodes" : false, "testStepDescription" : "Validate PO WorkBench Tab is displayed"}}									
+								]
+							}
+						]
+					}
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_006",
+				"testCaseTitle": "Verify New PO form",
+				"testCaseDescription": "Creating New Purchase Order Form",
+				"dependsOn": "PUR_005",
+				"tags":["SmokeTest","P2P","NegativeTest"],
+				"testCaseSteps": [
+					{"clickElement" : [{"NewPO":{"xpathparams": [], "testStepDescription" : "Click on New button on PO Workbench Tab"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"sessionTab":{"xpathparams":["Purchase Order"], "continueTestNodes" : false, "testStepDescription" : "Validate PO Tab is displayed"}}									
+								]
+							}
+						]
+					}
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_007",
+				"testCaseTitle": "Verify Inactive BP for PO",
+				"testCaseDescription": "Validate Invalid Business Partner for Purchase Order",
+				"dependsOn": "PUR_006",
+				"tags":["SmokeTest","NegativeTest"],
+				"testCaseSteps": [
+					{"typeTextWithTabKey" : [{"inputFields":{"xpathparams": ["Buy-from","Business Partner:"], "value" : "CUS000002", "testStepDescription" : "Enter Inactive BP Details"}}]},
+					{ "validate": 
+						[ 
+							{ "isDisplayed":
+								[
+									{"errorMessagePopUp":{"xpathparams":["Specified \"Business Partner\" not found in \"Buy-from Business Partners\". Enter another \"Business Partner\"."], "continueTestNodes" : false, "testStepDescription": "Validate the Error Message for Inactive BP Details"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"buttonOKError":{"xpathparams": [], "tesStepDescription": "Click on OK button to close the error message"}}]}
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_008",
+				"testCaseTitle": "Verify Active BP for PO",
+				"testCaseDescription": "Validate valid Business Partner for Purchase Order",
+				"dependsOn": "PUR_006",
+				"tags":["SmokeTest","P2P","NegativeTest"],
+				"testCaseSteps": [
+					{"clickElement" : [{"searchButtonInputFields":{"xpathparams": ["Buy-from","Business Partner"],"testStepDescription" : "Click on Search Button to search the Bussiness Partner"}}]},
+					{"typeTextWithTabKey" : [{"textinputFieldsSearch":{"xpathparams": [], "value" : "$activeBP", "testStepDescription" : "Enter Active BP value"}}]},
+					{"clickElement" : [{"windowFirstRowCheckBox":{"xpathparams": [], "tesStepDescription": "Click on check box"}}]},
+					{"clickElement" : [{"windowOkButton":{"xpathparams": [],"testStepDescription" : "Click on Ok Button"}}]}
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_009",
+				"testCaseTitle": "Verify Invalid Order Type for PO",
+				"testCaseDescription": "Validate invalid Order Type for Purchase Order",
+				"dependsOn": "PUR_008",
+				"tags":["SmokeTest","NegativeTest"],
+				"testCaseSteps": [
+				    { "validate": 
+						[ 
+							{ "isDisplayed":
+								[
+									{"inputFields":{"xpathparams":["Control","Order Type"], "continueTestNodes" : false, "testStepDescription": "Validate the Order Type field"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"inputFields":{"xpathparams": ["Control","Order Type"],"testStepDescription" : "Click on  Purchase order type"}}]},
+					{"typeTextWithTabKey" : [{"inputFields":{"xpathparams": ["Control","Order Type"], "value" : "ABC", "testStepDescription":"Enter Invalid Order Type"}}]},
+					{ "keyBoardEvent": { "tab":"1"}},
+					{ "validate": 
+						[ 
+							{ "isDisplayed":
+								[
+									{"errorMessagePopUp":{"xpathparams":["Specified \"Order Type\" not found in \"Purchase Order Types\". Enter another \"Order Type\"."], "continueTestNodes" : false, "testStepDescription": "Validate the Error Message for Invalid Order Type"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"buttonOKError":{"xpathparams": [],"testStepDescription" : "Click on OK Button to close the error message"}}]}
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_010",
+				"testCaseTitle": "Verify Valid Order Type for PO",
+				"testCaseDescription": "Validate valid Order Type for Purchase Order",
+				"dependsOn": "PUR_008",
+				"tags":["SmokeTest","P2P","NegativeTest"],
+				"testCaseSteps": [
+					{"clickElement" : [{"searchButtonInputFields":{"xpathparams": ["Control","Order Type"],"testStepDescription" : "Click on Search Button to search the Purchase order type"}}]},
+					{"typeTextWithTabKey" : [{"textinputfieldSeriesSearch":{"xpathparams": [], "value" : "$validOrderType", "testStepDescription" : "Enter valid Purchase order type value"}}]},
+					{"clickElement" : [{"windowFirstRowCheckBox":{"xpathparams": [], "tesStepDescription": "Click on check box"}}]},
+					{"clickElement" : [{"windowOkButton":{"xpathparams": [],"testStepDescription" : "Click on Ok Button"}}]}
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_011",
+				"testCaseTitle": "Verify Invalid Purchase office",
+				"testCaseDescription" : "Enter Invalid Purchase Office and Validate the error message displayed",
+				"dependsOn": "PUR_010",
+				"tags":["SmokeTest","NegativeTest"],
+				"testCaseSteps": [
+					{"typeTextWithTabKey" : [{"inputFields":{"xpathparams": ["Control","Purchase Office"], "value" : "NAVOFF", "testStepDescription": "Enter Invalid Purchase Office"}}]},
+					{ "validate": 
+						[ 
+							{ "isDisplayed":
+								[
+									{"errorMessagePopUp":{"xpathparams":["Specified \"Purchase Office\" not found in \"Purchase Offices\". Enter another \"Purchase Office\"."], "continueTestNodes" : false, "testStepDescription" : "Validate the error message displayed for Invalid Purchase Office"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"buttonOKError":{"xpathparams": [], "testStepDescription": "Click on OK button to close the error message for Invalid Purchase Office"}}]}
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_012",
+				"testCaseTitle": "Verify Valid Purchase office",
+				"testCaseDescription": "Enter Valid Purchase Office",
+				"dependsOn": "PUR_010",
+				"tags":["SmokeTest","P2P","NegativeTest"],
+				"testCaseSteps": [
+					{"clickElement" : [{"searchButtonInputFields":{"xpathparams": ["Control","Purchase Office"],"testStepDescription" : "Click on Search Button to pick the Purchase Office"}}]},
+					{"typeTextWithTabKey" : [{"textinputfieldSeriesSearch":{"xpathparams": [], "value" : "PUROFF", "testStepDescription" : "Enter Active BP value"}}]},					
+					{"clickElement" : [{"windowFirstRowCheckBox":{"xpathparams": [], "tesStepDescription": "Click on check box"}}]},
+					{"clickElement" : [{"windowOkButton":{"xpathparams": [],"testStepDescription" : "Click on Ok Button"}}]}
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_013",
+				"testCaseTitle": "Verify Invalid Order series",
+				"testCaseDescription" : "Enter Invalid Order Series and validate the error message displayed",
+				"dependsOn": "PUR_012",
+				"tags":["SmokeTest","NegativeTest"],
+				"testCaseSteps": [
+					{"typeTextWithTabKey" : [{"inputFields":{"xpathparams": ["Control","Order:"], "value" : "ABC", "testStepDescription" : "Enter Invalid Order Series"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"errorMessagePopUp":{"xpathparams":["Change the value of the Purchase Order field."], "continueTestNodes" : false, "testStepDescription" : "Validate the error message displayed for Invalid Order Series"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"buttonOKError":{"xpathparams": [], "testStepDescription": "Click on OK button to close the error message for Invalid Purchase Order Series"}}]}
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_014",
+				"testCaseTitle": "Verify Valid Order Series",
+				"testCaseDescription": "Enter Valid Order Series",
+				"dependsOn": "PUR_012",
+				"tags":["SmokeTest","P2P","NegativeTest"],
+				"testCaseSteps": [
+					{"clickElement" : [{"searchButtonInputFields":{"xpathparams": ["Control","Order:"],"testStepDescription" : "Click on Search Button to search the Valid order series"}}]},
+					{"typeTextWithTabKey" : [{"textinputFieldsSearch":{"xpathparams": [], "value" : "$validOrderSeries", "testStepDescription" : "Enter valid valid order series value"}}]},
+					{"clickElement" : [{"windowFirstRowCheckBox":{"xpathparams": [], "tesStepDescription": "Click on check box"}}]},
+					{"clickElement" : [{"windowOkButton":{"xpathparams": [],"testStepDescription" : "Click on Ok Button"}}]}
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_015",
+				"testCaseTitle": "Verify Inactive Ship From BP",
+				"testCaseDescription" : "Enter Inactive Ship From BP",
+				"dependsOn": "PUR_014",
+				"tags":["SmokeTest","NegativeTest"],
+				"testCaseSteps": [
+					{"typeTextWithTabKey" : [{"inputFields":{"xpathparams": ["Ship-from","Business Partner"], "value" : "CUS000002","testStepDescription": "Enter Inactive BP in the Ship-From BP textbox"}}]},
+					{ "validate": 
+						[ 
+							{ "isDisplayed":
+								[
+									{"errorMessagePopUp":{"xpathparams":["Specified \"Business Partner\" not found in \"Ship-from Business Partners\". Enter another \"Business Partner\"."], "continueTestNodes" : false, "testStepDescription": "Validate the error message displayed for the Inactive BP in SHIP-FROM BP textbox"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"buttonOKError":{"xpathparams": [],"testStepDescription":"Click on OK button to close the error message displayed for Inactive BP in SHIP-FROM BP textbox"}}]}
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_016",
+				"testCaseTitle": "Verify Ship From BP Not Linked to BP",
+				"testCaseDescription": "Enter Invalid BP not linked to BP",
+				"dependsOn": "PUR_014",
+				"tags":["SmokeTest","NegativeTest"],
+				"testCaseSteps": [
+					{"typeTextWithTabKey" : [{"inputFields":{"xpathparams": ["Ship-from","Business Partner"], "value" : "CUS000003","testStepDescription": "Enter Invalid BP in Ship-From"}}]},
+					{ "validate": 
+						[ 
+							{ "isDisplayed":
+								[
+									{"errorMessagePopUp":{"xpathparams":["Specified \"Business Partner\" not found in \"Ship-from Business Partners\". Enter another \"Business Partner\"."], "continueTestNodes" : false,"testStepDescription": "Validate the error message displayed for Invalid BP in SHIP-FROM BP textbox"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"buttonOKError":{"xpathparams": [],"testStepDescription":"Click on OK button to close the Invalid BP in the SHIP-FROM BP textbox"}}]}
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_017",
+				"testCaseTitle": "Verify Active Ship From BP",
+				"testCaseDescription": "Enter Active BP in SHIP_FROM BP textbox",
+				"dependsOn": "PUR_014",
+				"tags":["SmokeTest","P2P","NegativeTest"],
+				"testCaseSteps": [
+					{"clickElement" : [{"inputFields":{"xpathparams": ["Ship-from","Business Partner"],"testStepDescription" : "Click on ship-from BP input field to search the Bussiness Partner"}}]},
+					{"clickElement" : [{"searchButtonInputFields":{"xpathparams": ["Ship-from","Business Partner"],"testStepDescription" : "Click on Search Button to search the Bussiness Partner"}}]},
+					{"typeTextWithTabKey" : [{"textinputFieldsSearch":{"xpathparams": [], "value" : "$activeBP", "testStepDescription" : "Enter Active BP value"}}]},
+					{"clickElement" : [{"windowFirstRowCheckBox":{"xpathparams": [], "tesStepDescription": "Click on check box"}}]},
+					{"clickElement" : [{"windowOkButton":{"xpathparams": [],"testStepDescription" : "Click on Ok Button"}}]}
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_018",
+				"testCaseTitle": "Verify Invalid Currency",
+				"testCaseDescription":"Enter Invalid Currency",
+				"dependsOn": "PUR_016",
+				"tags":["SmokeTest","NegativeTest"],
+				"testCaseSteps": [
+					{"typeTextWithTabKey" : [{"inputFields":{"xpathparams": ["Financial","Currency"], "value" : "ABC", "testStepDescription": "Enter Invalid Currency"}}]},
+					{ "validate": 
+						[ 
+							{ "isDisplayed":
+								[
+									{"errorMessagePopUp":{"xpathparams":["Specified \"Currency\" not found in \"Currencies\". Enter another \"Currency\"."], "continueTestNodes" : false, "testStepDescription": "Validate the error message diplayed for the Invalid Currency"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"buttonOKError":{"xpathparams": [],"testStpDescription":"Click on OK button to close the Error Message for Invalid currency"}}]}
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_019",
+				"testCaseTitle": "Verify Non Local Currency",
+				"testCaseDescription":"Enter Non Local Currency and validate the error message",
+				"dependsOn": "PUR_018",
+				"tags":["SmokeTest","NegativeTest"],
+				"testCaseSteps": [
+					{"typeTextWithEnter" : [{"inputFields":{"xpathparams": ["Financial","Currency"], "value" : "$nonLocalCurrency","testStepDescription": "Enter Non Local Currency"}}]}
+					
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_020",
+				"testCaseTitle": "Verify Valid Currency",
+				"testCaseDescription": "Enter Valid Currency",
+				"dependsOn": "PUR_017",
+				"tags":["SmokeTest","P2P","NegativeTest"],
+				"testCaseSteps": [
+					{"clickElement" : [{"searchButtonInputFields":{"xpathparams": ["Financial","Currency"],"testStepDescription" : "Click on Search Button to search the valid currency"}}]},
+					{"typeTextWithTabKey" : [{"textinputFieldsSearch":{"xpathparams": [], "value" : "$validCurrency", "testStepDescription" : "Enter Active Currency value"}}]},
+					{"clickElement" : [{"windowFirstRowCheckBox":{"xpathparams": [], "tesStepDescription": "Click on check box"}}]},
+					{"clickElement" : [{"windowOkButton":{"xpathparams": [],"testStepDescription" : "Click on Ok Button"}}]}
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_021",
+				"testCaseTitle": "Verify PO Generation",
+				"testCaseDescription":"Validate the Status of PO Generation",
+				"dependsOn": "PUR_020",
+				"tags":["SmokeTest","P2P","NegativeTest"],
+				"testCaseSteps": [
+					{ "validate": 
+						[ 
+							{ "isDisplayed":
+								[
+									{"orderStatus":{"xpathparams":["Created"], "continueTestNodes" : false,"testStepDescription": "Validate the status of the PO,it should be in Created state"}}									
+								]
+							}
+						]
+					}
+					
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_022",
+				"testCaseTitle": "Verify New Order Lines",
+				"testCaseDescription": "Click on New on the Line to create new line",
+				"dependsOn": "PUR_021",
+				"tags":["SmokeTest","P2P","NegativeTest"],
+				"testCaseSteps": [
+					{"clickElement" : [{"buttonAddnewLine":{"xpathparams": ["Purchase Order"],"testStepDescription":"Click on New on the Line to create a new line"}}]},
+					{"doubleClickElement" : [{"splitBar":{"xpathparams": [],"testStepDescription": "Click on the splitbar to move upwards"}}]},
+					{ "keyBoardEvent": { "tab":"3"}}				
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_023",
+				"testCaseTitle": "Verify Invalid Item",
+				"testCaseDescription":"Enter Invalid Item in the Line and validate the error message displayed",
+				"dependsOn": "PUR_022",
+				"tags":["SmokeTest","NegativeTest"],
+				"testCaseSteps": [
+					{"typeTextWithTabKey" : [{"purchaseItemEntry":{"xpathparams": [], "value" : "CAPA00009GGG0XX1", "testStepDescription" : "Enter invalid Item in the line"}}]},
+					{ "validate": 
+						[ 
+							{ "isDisplayed":
+								[
+									{"errorMessagePopUp":{"xpathparams":["Specified \"Item\" not found in \"Item - Purchase\". Enter another \"Item\"."], "continueTestNodes" : false,"testStepDescription":"Validate the error message displayed for the Invalid Item in the Line"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"buttonOKError":{"xpathparams": [],"testStepDescription":"Click on OK button to close the error message for the Invalid Item in the Line"}}]}										
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_024",
+				"testCaseTitle": "Verify Valid Item",
+				"testCaseDescription": "Enter Valid Item in the Line",
+				"dependsOn": "PUR_022",
+				"tags":["SmokeTest","P2P","NegativeTest"],
+				"testCaseSteps": [
+					{"clickElement" : [{"searchButtonPurchaseitem":{"xpathparams": [],"testStepDescription":"Click on search button to search the valid Item in the Line"}}]},
+					{"typeTextWithTabKey" : [{"textinputFieldsSearch":{"xpathparams": [], "value" : "$validItem", "testStepDescription" : "Enter Active Item value"}}]},
+					{"clickElement" : [{"windowFirstRowCheckBox":{"xpathparams": [], "tesStepDescription": "Click on check box"}}]},
+					{"clickElement" : [{"windowOkButton":{"xpathparams": [],"testStepDescription" : "Click on Ok Button"}}]},
+					{ "keyBoardEvent": { "tab":"1"}},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"labelwithText":{"xpathparams":["OK"], "continueTestNodes" : false}},
+									{"then":
+									[
+										{"clickElement" : [{"labelwithText":{"xpathparams": ["OK"]}}]}
+									]
+									}
+								]
+							}
+						]
+					}
+					
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_025",
+				"testCaseTitle": "Verify Zero Qty",
+				"testCaseDescription":"Enter zero qty and validate the error message displayed",
+				"dependsOn": "PUR_024",
+				"tags":["SmokeTest","NegativeTest"],
+				"testCaseSteps": [
+					{"typeTextWithTabKey" : [{"purchaseItemQuantity":{"xpathparams": [], "value" : "$zeroQty", "testStepDescription" : "Enter zero Quantity"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"errorMessagePopUp":{"xpathparams":["Enter a value for the Ordered Quantity field."], "continueTestNodes" : false,"testStepDescription": "Validate the error message for the zero qty"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"buttonOKError":{"xpathparams": [],"testStepDescription":"Click on OK Button to close the error message for zero qty"}}]}
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_026",
+				"testCaseTitle": "Verify Valid Qty",
+				"testCaseDescription":"Enter valid qty greater than 0",
+				"dependsOn": "PUR_024",
+				"tags":["SmokeTest","P2P","NegativeTest"],
+				"testCaseSteps": [
+					{"typeTextWithTabKey" : [{"purchaseItemQuantity":{"xpathparams": [], "value" : "$validQty", "testStepDescription" : "Enter valid Quantity"}}]},
+					{ "keyBoardEvent": { "tab":"1"}}
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_027",
+				"testCaseTitle": "Verify Price Entry",
+				"testCaseDescription" :"Enter the price entry",
+				"dependsOn": "PUR_026",
+				"tags":["SmokeTest","P2P","NegativeTest"],
+				"testCaseSteps": [
+					{"typeTextWithTabKey" : [{"purchaseItemPrice":{"xpathparams": [], "value" : "$price", "testStepDescription" : "Enter the Price"}}]},
+					{ "keyBoardEvent": { "tab":"2"}}
+				]
+			}
+		},
+				{
+			"testNode": {
+				"testCaseID": "PUR_028",
+				"testCaseTitle": "Verify Save Order",
+				"testCaseDescription" : "Click on Save to save PO",
+				"dependsOn": "PUR_027",
+				"tags":["SmokeTest","P2P","NegativeTest"],
+				"testCaseSteps": [
+				    {"doubleClickElement" : [{"splitBar":{"xpathparams": [],"testStepDescription": "Double Click on splitbar to move downwards"}}]},
+					{"getText": [{"inputFields":{"xpathparams": ["Control","Order:"], "varName" : "purchaseOrderNumber","testStepDescription":"Get the genrated purchase order number and save"}}]},					
+					{"clickElement" : [{"buttonSaveSession":{"xpathparams": ["Purchase Order"],"testStepDescription":"Click on Save button to save the PO"}}]}
+					
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_029",
+				"testCaseTitle": "Verify Approve Order",
+				"testCaseDescription": "Click on Action button and click on Approve button to Approve the order and validate the status of the PO",
+				"dependsOn": "PUR_028",
+				"tags":["SmokeTest","P2P"],
+				"testCaseSteps": [
+				
+				     {"clickElement" : [{"buttonMenuHeadres":{"xpathparams": ["Purchase Order","Actions"],"testStepDescription":"Click on Action Button"}}]},
+				     
+					{"clickElement" : [{"buttonMenuItemUnderActions":{"xpathparams": ["Approve"],"testStepDescription":"Click on Approve under the Actions Menu"}}]},
+					
+					{ "validate": 
+						[ 
+							{ "isDisplayed":
+								[
+									{"orderStatus":{"xpathparams":["Approved"], "continueTestNodes" : false,"testStepDescription":"Validate the status changed to APproved"}}									
+								]
+							}
+						]
+					}
+						
+				]
+			}
+		},
+{
+			"testNode": {
+				"testCaseID": "PUR_030",
+				"testCaseTitle": "Navigation to Purchase Order Line Status",
+				"testCaseDescription":"Select the Lineitems and click on Line Action Button to navigate to Line Status Page",
+				"dependsOn": "PUR_029",
+				"tags":["P2P"],
+				"testCaseSteps": [
+				
+				     {"clickElement" : [{"selectLineItems":{"xpathparams": [],"testStepDescription":"Click on check box to select the lines"}}]},
+				     
+					{"clickElement" : [{"selectAll":{"xpathparams": ["All"],"testStepDescription":"Click on All to select all the lines"}}]},
+					
+					{"clickElement" : [{"lineActionButton1":{"xpathparams": ["Purchase Order","References"],"testStepDescription":"Click on Line Action Button"}}]},
+					
+					{"clickElement" : [{"buttonMenuItemUnderActions":{"xpathparams": ["Status"],"testStepDescription": "Click on Release to Warehousing under the Action Button"}}]},
+										
+					{"clickElement" : [{"sessionTab":{"xpathparams": ["Purchase Order Line Status"],"testStepDescription":"Click on Purchase Order Tab to move to the previous session"}}]}
+					
+					
+					
+						
+				]
+			}
+		},
+			
+	{
+			"testNode": {
+				"testCaseID": "PUR_031",
+				"testCaseTitle": "Execute Print Purchase Orders",
+				"testCaseDescription":"Execute Print Purchase Orders",
+				"dependsOn": "PUR_030",
+				"tags":["P2P"],
+				"testCaseSteps": [
+				    
+				   { "validate": 
+						[ 
+							{ "isDisplayed":
+								[
+									{"automaticStatus":{"xpathparams":["Print Purchase Orders","No"], "continueTestNodes" : false,"testStepDescription":"Validate the Automatic status of Print Purchase Orders"}},									
+								    {"then":
+									[
+										{"clickElement" : [{"Execute":{"xpathparams": [],"testStepDescription":"Click on Execute"}}]},
+										{"clickElement" : [{"popUpMenubutton":{"xpathparams": ["Print Purchase Orders","Print"],"testStepDescription":"Click on Print in the PO Session"}}]},
+										{"clickElement" : [{"sessionClose":{"xpathparams": [],"testStepDescription":"Click on Close for the Print Purchase Order Tab"}}]},
+										{"clickElement" : [{"sessionTab":{"xpathparams": ["Purchase Order Line Status"],"testStepDescription": "Click on the Purchase Order Line Status Tab to move to the previous session"}}]},
+										{"clickElement" : [{"popUpMenubutton":{"xpathparams": ["Print Purchase Orders","Close"],"testStepDescription":"Click on Close on the PO Session"}}]}
+									]
+									}
+								]
+							}
+						]
+					}				     
+				]
+			}
+		},
+			{
+			"testNode": {
+				"testCaseID": "PUR_032",
+				"testCaseTitle": "Execute Release Purchase Orders to Warehousing",
+				"testCaseDescription":"Execute Release Purchase Orders to Warehousing",
+				"dependsOn": "PUR_031",
+				"tags":["P2P"],
+				"testCaseSteps": [
+				    
+				   { "validate": 
+						[ 
+							{ "isDisplayed":
+								[
+									{"automaticStatus":{"xpathparams":["Release Purchase Orders to Warehousing","No"], "continueTestNodes" : false,"testStepDescription":"Validate the Automatic status of Release Purchase Orders to Warehousing"}},									
+								    {"then":
+									[
+										{"clickElement" : [{"Execute":{"xpathparams": [],"testStepDescription":"Click on Execute"}}]}
+											
+									]
+									}
+								]
+							}
+						]
+					}				     
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_033",
+				"testCaseTitle": "Execute Awaiting Receipts - Warehouse",
+				"testCaseDescription":"Execute Awaiting Receipts - Warehouse",
+				"dependsOn": "PUR_032",
+				"tags":["P2P"],
+				"testCaseSteps": [
+				    
+				   { "validate": 
+						[ 
+							{ "isDisplayed":
+								[
+									{"automaticStatus":{"xpathparams":["Awaiting Receipts - Warehouse","No"], "continueTestNodes" : false,"testStepDescription":"Validate the Automatic status of Awaiting Receipts - Warehouse"}},									
+								    {"then":
+									[
+										{"clickElement" : [{"Execute":{"xpathparams": [],"testStepDescription":"Click on Execute"}}]},
+										{"clickElement" : [{"sessionTab":{"xpathparams": ["Inbound Line Status Overview"],"testStepDescription": "Click on the Inbound Line Status Overview Tab"}}]},
+										{"clickElement" : [{"buttonMenuHeadres":{"xpathparams": ["Inbound Line Status Overview","Actions"],"testStepDescription":"Click on Actions"}}]},
+										{"clickElement" : [{"buttonMenuItemUnderActions":{"xpathparams": ["Receive"],"testStepDescription":"Click on Receive "}}]},
+										{"clickElement" : [{"sessionTab":{"xpathparams": ["Warehouse Receipt"],"testStepDescription": "Click on Warehouse Receipt session"}}]},
+										{"typeTextWithTabKey" : [{"inputFields":{"xpathparams": ["Delivery","Packing Slip"], "value" : "Packing Slip1","testStepDescription":"Enter the Packin Slip Number"}}]},
+										{"clickElement" : [{"buttonMenuHeadres":{"xpathparams": ["Warehouse Receipt","Confirm Receipt"],"testStepDscription":"Click on Confirm Button on the Header"}}]},
+					                    {"clickElement" : [{"buttonYesDialogButton":{"xpathparams": ["Yes"],"testStepDescription":"Click on Yes in the Dialog Box"}}]},
+										{"clickElement" : [{"buttonSaveAndExit":{"xpathparams": ["Warehouse Receipt"],"testStepDescription":"Click on Save and Exit on Warehouse Receipt Session"}}]},
+										{"clickElement" : [{"sessionTab":{"xpathparams": ["Inbound Line Status Overview"],"testStepDescription": "Click onInbound Line Status Overview session"}}]},
+										{"clickElement" : [{"buttonSaveAndExit":{"xpathparams": ["Inbound Line Status Overview"],"testStepDescription":"Click on Save and Exit on Inbound Line Status Overview Session"}}]}
+									]
+									}
+								]
+							}
+						]
+					}				     
+				]
+			}
+		},	
+		{
+			"testNode": {
+				"testCaseID": "PUR_034",
+				"testCaseTitle": "Execute Print Purchase Invoices",
+				"testCaseDescription":"Execute Print Purchase Invoices",
+				"dependsOn": "PUR_033",
+				"tags":["P2P"],
+				"testCaseSteps": [
+				    
+				  { "validate": 
+						[ 
+							{ "isDisplayed":
+								[
+									{"automaticStatus":{"xpathparams":["Print Purchase Invoices","No"], "continueTestNodes" : false,"testStepDescription":"Validate the Automatic status of Awaiting Receipts - Warehouse"}},									
+								    {"then":
+									[
+									   {"clickElement" : [{"Execute":{"xpathparams": [],"testStepDescription":"Click on Execute"}}]},
+									   {"clickElement" : [{"options":{"xpathparams": [],"testStepDescription":"Click on Options"}}]},
+					                   {"clickElement" : [{"finalInvoices":{"xpathparams": [],"testStepDescription":"Click on Final invoices"}}]},
+					                   {"clickElement" : [{"popUpMenubutton":{"xpathparams": ["Print Purchase Invoices","Print"]},"testStepDescription":"Click on Print on the PO Session"}]},
+					                   {"typeTextWithTabKey" : [{"device":{"xpathparams": [], "value" : "$device","testStepDescription":"Enter the value D in the Device text box"}}]},
+					                   {"clickElement" : [{"continueBtn":{"xpathparams": [],"testStepDescription":"Click on Continue button"}}]},
+					                   {"clickElement" : [{"sessionClose":{"xpathparams": [],"testStepDescription":"Close the Performa Purchase Invoice Tab"}}]},
+					                   {"clickElement" : [{"sessionClose":{"xpathparams": [],"testStepDescription":"Close the Print Purchase Invoice Tab"}}]},
+					                   {"clickElement" : [{"sessionTab":{"xpathparams": ["Purchase Order Line Status"],"testStepDescription":"Click on Purchase Order Line Status"}}]},
+					                   {"clickElement" : [{"popUpMenubutton":{"xpathparams": ["Print Purchase Invoices","Close"],"testStepDescription":"Click on Close"}}]}
+								     ]
+									}
+								]
+							}
+						]
+					}					
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_035",
+				"testCaseTitle": "Execute Process Delivered Purchase Orders",
+				"testCaseDescription":"Execute Process Delivered Purchase Orders",
+				"dependsOn": "PUR_034",
+				"tags":["P2P"],
+				"testCaseSteps": [
+				    
+				  { "validate": 
+						[ 
+							{ "isDisplayed":
+								[
+									{"automaticStatus":{"xpathparams":["Process Delivered Purchase Orders","No"], "continueTestNodes" : false,"testStepDescription":"Validate the Automatic status of Awaiting Receipts - Warehouse"}},									
+								    {"then":
+									[
+									 {"clickElement" : [{"Execute":{"xpathparams": [],"testStepDescription":"Click on Execute"}}]},
+					                 {"clickElement" : [{"popUpMenubutton":{"xpathparams": ["Process Delivered Purchase Orders","Process"],"testStepDescription":"Click on Process Button"}}]},
+					                 {"typeTextWithTabKey" : [{"device":{"xpathparams": [], "value" : "$device","testStepDescription":"Enter the value D in the device textbox"}}]},
+					                 {"clickElement" : [{"continueBtn":{"xpathparams": [],"testStepDescription":"Click on Continue button"}}]},
+					                 {"clickElement" : [{"popUpMenubutton":{"xpathparams": ["Process Delivered Purchase Orders","Close"],"testStepDescription":"Click on Close Button"}}]},
+					                 {"clickElement" : [{"buttonSaveAndExit":{"xpathparams": ["Purchase Order Line Status"],"testStepDescription":"Click on Save and Exit Button on Purchase Order Line Status"}}]},
+					                 {"clickElement" : [{"sessionTab":{"xpathparams": ["Purchase Order"],"testStepDescription":"Click on Purchase Order session Tab"}}]},
+					                 {"clickElement" : [{"PORefresh":{"xpathparams": [],"testStepDescription":"Click on PO Refresh Button"}}]}
+								  ]
+									}
+								]
+							}
+						]
+					}					
+				]
+			}
+		},
+		
+		
+		
+		{
+			"testNode": {
+				"testCaseID": "PUR_036",
+				"testCaseTitle": "Create Transactions",
+				"testCaseDescription" : "Navigate to Transactions Session under Journal Voucher Entry",
+				"dependsOn": "PUR_035",
+				"tags":["P2P"],
+				"testCaseSteps": [
+					{"clickElement" : [{"subMenuItem":{"xpathparams": ["Infor LN", "Financials"],"testStepDescription":"Click on Financials"}}]},
+					{"clickElement" : [{"subMenuItems":{"xpathparams": ["Infor LN", "Financials", "General Ledger"],"testStepDescription":"Click on General Ledger"}}]},
+					{"clickElement" : [{"subMnuItemChildJVE":{"xpathparams": ["Infor LN", "Financials", "General Ledger","Journal Voucher Entry"],"testStepDescription":"Click on Journal Voucher Entry"}}]},
+					{"clickElement" : [{"subMenuItemSubChild":{"xpathparams": ["Infor LN", "Financials", "General Ledger","Journal Voucher Entry","Transactions"],"testStepDescription":"Click on Transactions"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"sessionTab":{"xpathparams":["Transactions"], "continueTestNodes" : false,"testStepDescription":"Validate the Transaction Tab"}}									
+								]
+							}
+						]
+					}
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_037",
+				"testCaseTitle": "Click on New Batch Icon",
+				"testCaseDescription":"Create new Batch",
+				"dependsOn": "PUR_036",
+				"tags":["P2P"],
+				"testCaseSteps": [
+					{"clickElement" : [{"buttonAddnewHeader":{"xpathparams": ["Transactions"],"testStepDescription":"Click on New Icon to create New Batch"}}]}
+								
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_038",
+				"testCaseTitle": "Click on New at Line level",
+				"testCaseDescription":"Click on new icon in the line level to add new line",
+				"dependsOn": "PUR_037",
+				"tags":["P2P"],
+				"testCaseSteps": [
+					{"clickElement" : [{"buttonAddnewLine":{"xpathparams": ["Transactions"],"testStepDescription":"Click on New Icon at line level"}}]}
+								
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_039",
+				"testCaseTitle": "Enter Transaction Type related to Purchase Invoice",
+				"testCaseDescription": "Enter Transaction Type for Purchase Invoice",
+				"dependsOn": "PUR_038",
+				"tags":["P2P"],
+				"testCaseSteps": [
+				{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"textTransactionType":{"xpathparams":[], "continueTestNodes" : false,"testStepDescription":"Validate the transaction type input field at line level"}}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"textTransactionType":{"xpathparams": [],"testStepDescription":"Click on transaction type at line level"}}]},
+					{"clickElement" : [{"transactionTypeSearchButton":{"xpathparams": [],"testStepDescription":"Click on transaction type search button at line level"}}]},
+					{"typeTextWithTabKey" : [{"textinputfieldSeriesSearch":{"xpathparams": [], "value" : "$transactionType", "testStepDescription" : "Enter Transaction Type"}}]},
+					{"clickElement" : [{"windowFirstRowCheckBox":{"xpathparams": [], "tesStepDescription": "Click on check box"}}]},
+					{"clickElement" : [{"windowOkButton":{"xpathparams": [],"testStepDescription" : "Click on Ok Button"}}]}
+					
+	
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_040",
+				"testCaseTitle": "Enter into the Transaction type",
+				"testCaseDescription": "Click on Arrow button to enter into the Transaction Type",
+				"dependsOn": "PUR_039",
+				"tags":["P2P"],
+				"testCaseSteps": [
+					{"clickElement" : [{"buttonArrowTransactions":{"xpathparams": [],"testStepDescription":"Click on Arrow Buttton"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"sessionTab":{"xpathparams":["Purchase Invoice Entry"], "continueTestNodes" : false,"testStepDescription":"Validate Purchase Invoice Entry Session is displayed"}}									
+								]
+							}
+						]
+					}
+								
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_041",
+				"testCaseTitle": "Enter PO Number",
+				"testCaseDescription": "Select the Invoice type as Invoice Related to Purchase Order and input the generated purchase order number",
+				"dependsOn": "PUR_040",
+				"tags":["P2P"],
+				"testCaseSteps": [
+					{"clickElement" : [{"ddInvoiceType":{"xpathparams": ["Transactions"],"testStepDescription":"Click on Invoice Type"}}]},
+					{"clickElement" : [{"buttinInvoiceRelatedToPUR":{"xpathparams": ["Transactions"],"testStepDescription":"Click on Invoice Related to Purchase Order"}}]},
+					{"typeTextWithEnter" : [{"inputFieldwithSessionTabName":{"xpathparams": ["Purchase Invoice Entry","Order","Order"], "varName" : "purchaseOrderNumber","testStepDescription":"Enter the Generated PO in the text box"}}]}
+								 
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_042",
+				"testCaseTitle": "Invoice status verification ",
+				"testCaseDescription": "Verify the staus of the order,it should be Registered",
+				"dependsOn": "PUR_041",
+				"tags":["P2P"],
+				"testCaseSteps": [
+					{ "validate": 
+						[ 
+							{ "isDisplayed":
+								[
+									{"orderStatus":{"xpathparams":["Registered"], "continueTestNodes" : false,"testStepDescription":"Validate the status of the PO,it should be Registered"}}									
+								]
+							}
+						]
+					}
+					
+				]
+			}
+		},
+		
+		{
+			"testNode": {
+				"testCaseID": "PUR_043",
+				"testCaseTitle": "Click on Match Receipt ",
+				"testCaseDescription": "Click on MatchReceipt",
+				"dependsOn": "PUR_042",
+				"tags":["P2P"],
+				"testCaseSteps": [
+				    {"typeTextWithTabKey" : [{"inputFields":{"xpathparams": ["General","Supplier Invoice"], "varName" : "purchaseOrderNumber", "testStepDescription" : "Enter Supplier Invoice value"}}]},
+					{"clickElement" : [{"buttonMenuHeadres":{"xpathparams": ["Purchase Invoice Entry","Match Receipt"],"testStepDescription":"Click on Match Receipt"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"labelwithText":{"xpathparams":["OK"], "continueTestNodes" : false}},
+									{"then":
+									[
+										{"clickElement" : [{"labelwithText":{"xpathparams": ["OK"]}}]}
+									]
+									}
+								]
+							}
+						]
+					}
+				   ]
+			}
+		},
+		
+		{
+			"testNode": {
+				"testCaseID": "PUR_044",
+				"testCaseTitle": "Invoice Status verification after PO Number entered",
+				"testCaseDescription": "Validate Match Purchase Receipt Lines dialog box appears and validate the status of the pop up",
+				"dependsOn": "PUR_043",
+				"tags":["P2P"],
+				"testCaseSteps": [
+					{ "validate": 
+						[ 
+							{ "isDisplayed":
+								[
+									{"layOutPanelsession":{"xpathparams":["Match Purchase Receipt Lines"], "continueTestNodes" : false,"testStepDescription":"Validate Match Purchase Receipt Lines dialoug box appears"}}									
+								]
+							}
+						]
+					},
+					{ "validate": 
+						[ 
+							{ "isDisplayed":
+								[
+									{"status":{"xpathparams":["Registered"], "continueTestNodes" : false,"testStepDescription":"Validate status of Match Purchase Receipt Lines dialoug box"}}									
+								]
+							}
+						]
+					}
+					
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_045",
+				"testCaseTitle": "select Line under Match Purchase Receipt Lines session",
+				"testCaseDescription":"Select the line under Match Purchase Receipt Lines ",
+				"dependsOn": "PUR_044",
+				"tags":["P2P"],
+				"testCaseSteps": [
+					{"clickElement" : [{"checkBoxMatchPurchaseRL":{"xpathparams": [],"testStepDescription":"Click on check box to select the line under Match Purchase Receipt Lines"}}]}
+								
+				]
+			}
+		},
+		
+		{
+			"testNode": {
+				"testCaseID": "PUR_046",
+				"testCaseTitle": "Click on Match All",
+				"testCaseDescription":"Click on Match All under Action and click on Save and Close",
+				"dependsOn": "PUR_045",
+				"tags":["P2P"],
+				"testCaseSteps": [
+					{"clickElement" : [{"labelwithText":{"xpathparams": ["Match Selected Receipts"],"testStepDescription":"Click on Match All under Actions"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"labelwithText":{"xpathparams":["OK"], "continueTestNodes" : false}},
+									{"then":
+									[
+										{"clickElement" : [{"labelwithText":{"xpathparams": ["OK"]}}]}
+									]
+									}
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"buttonSaveAndExit":{"xpathparams": ["Match Purchase Receipt Lines"],"testStepDescription":"Click on Save and Close"}}]}
+								
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_047",
+				"testCaseTitle": "Status changes to Matched",
+				"testCaseDescription":"Validate the status after Matching the order",
+				"dependsOn": "PUR_046",
+				"tags":["P2P"],
+				"testCaseSteps": [
+					{ "validate": 
+						[ 
+							{ "isDisplayed":
+								[
+									{"sessionTab":{"xpathparams":["Purchase Invoice Entry"], "continueTestNodes" : false},"testStepDescription":"Validate the Purchase Invoice Entry Tab is displayed"}									
+								]
+							}		
+						]
+					},
+					{ "validate": 
+						[ 
+							{ "isDisplayed":
+								[
+									{"orderStatus":{"xpathparams":["Matched"], "continueTestNodes" : false},"testStepDescription":"Validate the status after Matching,it should be Matched"}									
+								]
+							}		
+						]
+					}
+				]
+			}
+			},
+				
+		
+		{
+			"testNode": {
+				"testCaseID": "PUR_048",
+				"testCaseTitle": "Invoice Integration Mapping",
+				"testCaseDescription":"Navigate to Integration Transactions under Integration Transactions",
+				"dependsOn": "PUR_047",
+				"tags":["P2P"],
+				"testCaseSteps": [
+					
+					{"clickElement" : [{"subMenuItemChild":{"xpathparams": ["Infor LN","Financials","General Ledger","Integration Transactions"],"testStepDescription":"Click on Integration Transactions under General Ledger"}}]},
+					{"clickElement" : [{"subMenuItemSubChild":{"xpathparams": ["Infor LN","Financials","General Ledger","Integration Transactions","Integration Transactions"],"testStepDescription":"Click on Integration Transactions under Integration Transactions"}}]}
+								
+				]
+			}
+		},
+		
+		{
+			"testNode": {
+				"testCaseID": "PUR_049",
+				"testCaseTitle": "Search the PO",
+				"testCaseDescription":"Click on Search Button on Integrationn Transactions and search for the generated PO Number ",
+				"dependsOn": "PUR_048",
+				"tags":["P2P"],
+				"testCaseSteps": [
+					{"clickElement" : [{"searchButton":{"xpathparams": ["Integration Transactions"],"testStepDescription":"Click on Search Button"}}]},
+					{ "validate": 
+						[ 
+							{ "isDisplayed":
+								[
+									{"selectBussinessObject":{"xpathparams":[], "continueTestNodes" : false},"testStepDescription":"Validate the Bussiness Object is present"}									
+								]
+							}		
+						]
+					},
+					{"clickElement" : [{"selectBussinessObject":{"xpathparams": [],"testStepDescription":"Click on Bussiness Object to change the transaction type "}}]},
+					{"clickElement" : [{"selectOrder":{"xpathparams": ["Purchase Order"],"testStepDescription":"Select the order type for Purchase Order"}}]},
+					{"clickElement" : [{"selectIntegrationDocumentType":{"xpathparams": [],"testStepDescription":"Click on Integration Document Type "}}]},
+					{"typeText" : [{"selectIntegrationDocumentType":{"xpathparams": [],"value":"Purchase Order/Receipt","testStepDescription":"Select the order type for Purchase Order"}}]},
+					{"typeTextWithTabKey" : [{"inputforIntegrationTransaction":{"xpathparams": [], "varName" : "purchaseOrderNumber","testStepDescription":"Enter the Input for the purchase order generated"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"labelwithText":{"xpathparams":["OK"], "continueTestNodes" : false}},
+									{"then":
+									[
+										{"clickElement" : [{"labelwithText":{"xpathparams": ["OK"]}}]}
+									]
+									}
+								]
+							}
+						]
+					}										
+				]
+			}
+			
+		},
+		
+		{
+			"testNode": {
+				"testCaseID": "PUR_050",
+				"testCaseTitle": "Map and Post the Invoice",
+				"testCaseDescription":"Select the Line and click on Map Specific Transactions and click on Post Specific Transactions",
+				"dependsOn": "PUR_049",
+				"tags":["P2P"],
+				"testCaseSteps": [
+				    { "validate": 
+						[ 
+							{ "isDisplayed":
+								[
+									{"tabJournalDetails":{"xpathparams":[], "continueTestNodes" : false},"testStepDescription":"Validate the Journal Tab is present"}									
+								]
+							}		
+						]
+					},
+					{"clickElement" : [{"tabJournalDetails":{"xpathparams": [],"testStepDescription":"Click on Journal Tab"}}]},
+					{"clickElement" : [{"checkBoxIT_1":{"xpathparams": [],"testStepDescription":"Click on CheckBox for the lline to select"}}]},
+					{"clickElement" : [{"actionButtonOnMatchReceipt":{"xpathparams": ["Integration Transactions","Actions"],"testStepDescription":"Click on Action Button"}}]},
+					{"clickElement" : [{"matchAll":{"xpathparams": ["ap Specific Transactions"],"testStepDescription":"Click on Map Specific Transactions"}}]},
+					{"clickElement" : [{"mappingOKButton":{"xpathparams": ["OK"],"testStepDescription":"Click on Ok Button for Mapping is complete Dialog Box"}}]},
+					{"clickElement" : [{"actionButtonOnMatchReceipt":{"xpathparams": ["Integration Transactions","Actions"],"testStepDescription":"Click on Action Button"}}]},
+					{"clickElement" : [{"matchAll":{"xpathparams": ["st Specific Transactions"],"testStepDescription":"Click on Post Specific Transactions"}}]},
+					{"clickElement" : [{"mappingOKButton":{"xpathparams": ["Yes"],"testStepDescription":"Click on Yes button after posting is done dialog box"}}]}
+						
+				]
+			}
+			
+		},
+		
+		{
+			"testNode": {
+				"testCaseID": "PUR_051",
+				"testCaseTitle": "Invoice Approval",
+				"testCaseDescription":"Move to Purchase Invoice Entry Tab and Aprrove the Invoice",
+				"dependsOn": "PUR_050",
+				"tags":["P2P"],
+				"testCaseSteps": [
+					{"clickElement" : [{"sessionTab":{"xpathparams": ["Purchase Invoice Entry"],"testStepDescription":"Move to the Purchase Invoice Entry Tab"}}]},
+					{"getText": [{"invoiceNumber":{"xpathparams": [], "varName" : "InvoiceNumber","testStepDescription":"Get the Invoice Number generated"}}]},
+					{"clickElement" : [{"buttonMenuHeadres":{"xpathparams": ["Purchase Invoice Entry","Approve"],"testStepDescription":"Click on Approve Button under the More Tool Bar"}}]},
+					{ "validate": 
+						[ 
+							{ "isDisplayed":
+								[
+									{"orderStatus":{"xpathparams":["Approved"], "continueTestNodes" : false},"testStepDescription":"Validate the status it should be displayed as Approved"}									
+								]
+							}		
+						]
+					}
+				]
+			}
+			
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_052",
+				"testCaseTitle": "Save and close",
+				"testCaseDescription":"Save and close all the session Tabs opened",
+				"dependsOn": "PUR_051",
+				"tags":["P2P"],
+				"testCaseSteps": [
+					{"clickElement" : [{"buttonSaveAndExit":{"xpathparams": ["Purchase Invoice Entry"],"testStepDescription":"Click on Save and Exit button on Purchase Invoice Entry"}}]},
+					{ "validate": 
+						[ 
+							{ "isDisplayed":
+								[
+									{"sessionTab":{"xpathparams":["Integration Transactions"], "continueTestNodes" : false},"testStepDescription":"Validate the Integration Transactions Tab is displayed"}									
+								]
+							}		
+						]
+					},
+					{"clickElement" : [{"sessionTab":{"xpathparams": ["Integration Transactions"],"testStepDescription":"Click on Integration Transactions Tab"}}]},
+					{"clickElement" : [{"buttonSaveAndExit":{"xpathparams": ["Integration Transactions"],"testStepDescription":"Click on Save and Exit button on Integration Transactions Tab"}}]},
+					{"clickElement" : [{"sessionTab":{"xpathparams": ["Transactions"],"testStepDescription":"Click on Transactions Tab"}}]}
+				
+				]
+			}
+			
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_053",
+				"testCaseTitle": "Navigate to Payments",
+				"testCaseDescription":"Navigate to Payments Advices under Automatic Payments",
+				"dependsOn": "PUR_052",
+				"tags":["P2P"],
+				"testCaseSteps": [
+					{"clickElement" : [{"subMenuItems":{"xpathparams": ["Infor LN", "Financials", "Cash Management"],"testStepDescription":"Click on Cash Management under Financials"}}]},
+					{"clickElement" : [{"subMnuItemChildJVE":{"xpathparams": ["Infor LN", "Financials", "Cash Management","Automatic Payments"],"testStepDescription":"Click on Automatic Payments under Cash Management"}}]},
+					{"clickElement" : [{"subMenuItemSubChild":{"xpathparams": ["Infor LN", "Financials", "Cash Management","Automatic Payments","Payment Advices"],"testStepDescription":"Click on Payment Advices under Automatic Payments"}}]},
+					{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"sessionTab":{"xpathparams":["Payment Advices"], "continueTestNodes" : false},"testStepDescription":"Validate Payment Advices Tab"}									
+								]
+							}
+						]
+					},
+					{"clickElement" : [{"buttonAddnewHeader":{"xpathparams": ["Payment Advices"],"testStepDescription":"Click on New on the Header to create new Payment Advice"}}]}
+					
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_054",
+				"testCaseTitle": "Click on New Payment Batch",
+				"testCaseDescription":"Click on New to create new payment batch",
+				"dependsOn": "PUR_053",
+				"tags":["P2P"],
+				"testCaseSteps": [
+					{"clickElement" : [{"buttonAddnewHeader":{"xpathparams": ["Payment Advice"],"testStepDescription":"Click on New on the Header to create new Payment Advice"}}]},
+					{"clickElement" : [{"buttonAddnewLine":{"xpathparams": ["Payment Advice"],"testStepDescription":"Click on New on the Line to create new Payment Advice"}}]}
+								
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_055",
+				"testCaseTitle": "Select Purchase Order",
+				"testCaseDescription":"Select the Business Partner for the purchase order",
+				"dependsOn": "PUR_054",
+				"tags":["P2P"],
+				"testCaseSteps": [
+					{"clickElement" : [{"textPurchasePaymentsBP":{"xpathparams": [],"testStepDescription":"Click on sales Business Partner field in the Line"}}]},
+					{"clickElement" : [{"searchButtonPurchaseBP":{"xpathparams": [],"testStepDescription":"Click on search button to search the Purchase BP in the Line"}}]},
+					{"typeTextWithTabKey" : [{"textinputFieldsSearch":{"xpathparams": [], "value" : "$activeBP", "testStepDescription" : "Enter Purchase BP value"}}]},
+					{"clickElement" : [{"windowFirstRowCheckBox":{"xpathparams": [], "tesStepDescription": "Click on check box"}}]},
+					{"clickElement" : [{"windowOkButton":{"xpathparams": [],"testStepDescription" : "Click on Ok Button"}}]},
+					{ "keyBoardEvent": { "tab":"2"}}
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_056",
+				"testCaseTitle": "Enter invoice details",
+				"testCaseDescription": "Enter the invoice details",				
+				"dependsOn": "PUR_055",
+				"tags":["P2P"],
+				"testCaseSteps": [
+					{"clickElement" : [{"textPurchaseDoc":{"xpathparams": [],"testStepDescription":"Click on Purchase Document field in the Line"}}]},
+					{"clickElement" : [{"searchbuttonPurchaseDoc":{"xpathparams": [],"testStepDescription":"Click on search button to search the Purchase invoice number in the document field"}}]},
+					{"typeTextWithTabKey" : [{"textinputFieldsSearch":{"xpathparams": [], "varName" : "InvoiceNumber", "testStepDescription" : "Enter Purchase invoice number in the search filed"}}]},
+					{"clickElement" : [{"windowFirstRowCheckBox":{"xpathparams": [], "tesStepDescription": "Click on check box"}}]},
+					{"clickElement" : [{"windowOkButton":{"xpathparams": [],"testStepDescription" : "Click on Ok Button"}}]},
+					{ "keyBoardEvent": { "tab":"6"}}
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_057",
+				"testCaseTitle": "Enter Payment method",
+				"testCaseDescription":"Enter the Payment Method",
+				"dependsOn": "PUR_056",
+				"tags":["P2P"],
+				"testCaseSteps": [
+					{"clickElement" : [{"textPurchasePaymentMethod":{"xpathparams": [],"testStepDescription":"Click on Payment method field in the Line"}}]},
+					{"clickElement" : [{"searxhButtonPurchasePaymentMethod":{"xpathparams": [],"testStepDescription":"Click on search button to search the Purchase payment method "}}]},
+					{"typeTextWithTabKey" : [{"textinputFieldsSearch":{"xpathparams": [], "value" : "$paymentMethod", "testStepDescription" : "Enter Purchase Payment method in the search filed"}}]},
+					{"clickElement" : [{"windowFirstRowCheckBox":{"xpathparams": [], "tesStepDescription": "Click on check box"}}]},
+					{"clickElement" : [{"windowOkButton":{"xpathparams": [],"testStepDescription" : "Click on Ok Button"}}]},
+					{ "keyBoardEvent": { "tab":"3"}}
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_058",
+				"testCaseTitle": "Enter Bank name",
+				"testCasaeDescription":"Enter the bank name",
+				"dependsOn": "PUR_057",
+				"tags":["P2P"],
+				"testCaseSteps": [
+					{"clickElement" : [{"textPurchaseBank":{"xpathparams": [],"testStepDescription":"Click on Purchase Bank field in the Line"}}]},
+					{"clickElement" : [{"searchButtonPurchaseBank":{"xpathparams": [],"testStepDescription":"Click on search button to search the Purchase Bank "}}]},
+					{"typeTextWithTabKey" : [{"textinputFieldsSearch":{"xpathparams": [], "value" : "$bankname", "testStepDescription" : "Enter Sales Bank in the search filed"}}]},
+					{"clickElement" : [{"windowFirstRowCheckBox":{"xpathparams": [], "tesStepDescription": "Click on check box"}}]},
+					{"clickElement" : [{"windowOkButton":{"xpathparams": [],"testStepDescription" : "Click on Ok Button"}}]},
+					{ "keyBoardEvent": { "tab":"1"}},
+					{"clickElement" : [{"textBusinessPartnerBank":{"xpathparams": [],"testStepDescription":"Click on Business Partner Bank field in the Line"}}]},
+					{"clickElement" : [{"searchButtonBusinessPartnerBank":{"xpathparams": [],"testStepDescription":"Click on search button to search the Business Partner Bank "}}]},
+					{"typeTextWithTabKey" : [{"textinputFieldsSearch":{"xpathparams": [], "value" : "$businessPartnerBank", "testStepDescription" : "Enter Business Partner Bank in the search filed"}}]},
+					{"clickElement" : [{"windowFirstRowCheckBox":{"xpathparams": [], "tesStepDescription": "Click on check box"}}]},
+					{"clickElement" : [{"windowOkButton":{"xpathparams": [],"testStepDescription" : "Click on Ok Button"}}]},
+					{ "keyBoardEvent": { "tab":"1"}}
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_059",
+				"testCaseTitle": "Select line",
+				"testCasaeDescription":"Select the checkbox to select line",
+				"dependsOn": "PUR_058",
+				"tags":["P2P"],
+				"testCaseSteps": [
+						{"clickElement" : [{"checkBoxPaymentAdvice":{"xpathparams": [],"testStepDescription":"Select the checkbox to select line"}}]}
+					
+				]
+			}
+		},
+		{
+			"testNode": {
+				"testCaseID": "PUR_060",
+				"testCaseTitle": "Payment process",
+				"testCaseDescription":"Selcet the Process under Actions and Close the Sessions",
+				"dependsOn": "PUR_059",
+				"tags":["P2P"],
+				"testCaseSteps": [
+						{"clickElement" : [{"buttonActionsPaymentAdvice":{"xpathparams": [],"testStepDescription":"Click on Actions Button"}}]},
+						{"clickElement" : [{"buttonProcessPA":{"xpathparams": [],"testStepDescription":"Click on Process"}}]},
+						{"clickElement" : [{"inputFields":{"xpathparams": ["Selection","Payment Process Default ID"],"testStepDescription":"Click on Payment Process Default ID"}}]},
+						{"textClearInputs" : [{"inputFields":{"xpathparams": ["Selection","Payment Process Default ID"],"testStepDescription":"Click on Payment Process Default ID"}}]},
+						{"clickElement" : [{"buttonCompose":{"xpathparams": [],"testStepDescription":"Click on Compose Button"}}]},
+						{"clickElement" : [{"buttonYesDialogButton":{"xpathparams": ["Payments per Currency"],"testStepDescription":"Click on Payments per Currency in the Dialog Box"}}]},
+						{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"labelwithText":{"xpathparams":["Select Device"], "continueTestNodes" : false}}
+								
+								]
+							}
+						]
+						},
+						{"typeTextWithTabKey" : [{"device1":{"xpathparams": [], "value" : "$device","testStepDescription":"Enter the value D in the Device text box"}}]},
+					    {"clickElement" : [{"continueBtn":{"xpathparams": [],"testStepDescription":"Click on Continue button"}}]},
+						{"clickElement" : [{"labelwithText":{"xpathparams": ["Transfer"],"testStepDescription":"Click on Transfer"}}]},
+						{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+
+									{"labelwithText":{"xpathparams":["Print Cheque Report"], "continueTestNodes" : false}}
+
+								
+								]
+							}
+						]
+
+					},
+						
+						{"clickElement" : [{"popUpMenubutton":{"xpathparams": ["Print Cheque Report","Print"],"testStepDescription":"Click on Print"}}]},
+						{"typeTextWithTabKey" : [{"device1":{"xpathparams": [], "value" : "$device","testStepDescription":"Enter the value D in the Device text box"}}]},
+					    {"clickElement" : [{"continueBtn":{"xpathparams": [],"testStepDescription":"Click on Continue button"}}]},
+					    {"clickElement" : [{"labelwithText":{"xpathparams": ["Post and Finalize"],"testStepDescription":"Click on Post and Finalize"}}]},
+						{"typeTextWithTabKey" : [{"device1":{"xpathparams": [], "value" : "$device","testStepDescription":"Enter the value D in the Device text box"}}]},
+					    {"clickElement" : [{"continueBtn":{"xpathparams": [],"testStepDescription":"Click on Continue button"}}]},
+						{"clickElement" : [{"sessionTab":{"xpathparams": ["Finalization Status"],"testStepDescription":"Click on Finalization Status Tab"}}]},
+						{"clickElement" : [{"sessionTab":{"xpathparams": ["Checks"],"testStepDescription":"Click on Checks Tab"}}]},
+						{"clickElement" : [{"sessionClose":{"xpathparams": [],"testStepDescription":"Close the session"}}]},
+						{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"sessionClose":{"xpathparams":[], "continueTestNodes" : false,"testStepDescription":"Validate the pdf tab is displayed"}}
+								
+								]
+							}
+						]
+						},
+						{"clickElement" : [{"sessionClose":{"xpathparams": [],"testStepDescription":"Close the session"}}]},
+						{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"sessionClose":{"xpathparams":[], "continueTestNodes" : false,"testStepDescription":"Validate the pdf tab is displayed"}}
+								
+								]
+							}
+						]
+						},
+						{"clickElement" : [{"sessionClose":{"xpathparams": [],"testStepDescription":"Close the session"}}]},
+					    {"clickElement" : [{"sessionClose":{"xpathparams": [],"testStepDescription":"Close the session"}}]},
+						{ "validate": 
+						[ 
+							{ "isElementPresent":
+								[
+									{"sessionClose":{"xpathparams":[], "continueTestNodes" : false,"testStepDescription":"Validate the pdf tab is displayed"}}
+								
+								]
+							}
+						]
+						},
+						{"clickElement" : [{"sessionClose":{"xpathparams": [],"testStepDescription":"Close the session"}}]},
+						{"clickElement" : [{"sessionClose":{"xpathparams": [],"testStepDescription":"Close the session"}}]},
+						{"clickElement" : [{"sessionTab":{"xpathparams": ["Payment Advice"],"testStepDescription":"Click on Payment Advice Tab"}}]},
+						{"clickElement" : [{"buttonOKPayments":{"xpathparams": [],"testStepDescription":"Click on OK Button to close the dialog box"}}]},
+						{"clickElement" : [{"buttonSaveAndExit":{"xpathparams": ["Payment Advice"],"testStepDescription":"Click on Save and Exit on Payment Advice Session"}}]},
+						{"clickElement" : [{"sessionTab":{"xpathparams": ["Payment Advices"],"testStepDescription":"Click on Payment Advices Tab"}}]},
+						{"clickElement" : [{"buttonSaveAndExit":{"xpathparams": ["Payment Advices"],"testStepDescription":"Click on Save and Exit on Payment Advices Session"}}]},
+						{"clickElement" : [{"sessionTab":{"xpathparams": ["Transactions"],"testStepDescription":"Click on Transactions Tab"}}]},
+						{"clickElement" : [{"buttonMenuHeadres":{"xpathparams": ["Transactions","Finalize"],"testStepDescription":"Click on Finalize Button"}}]},
+						{"typeTextWithTabKey" : [{"device":{"xpathparams": [], "value" : "$device","testStepDescription":"Enter the value D in the Device text box"}}]},
+					    {"clickElement" : [{"continueBtn":{"xpathparams": [],"testStepDescription":"Click on Continue button"}}]},
+						{"clickElement" : [{"sessionTab":{"xpathparams": ["Finalization Status"],"testStepDescription":"Click on Check Report Tab"}}]},
+						{"clickElement" : [{"sessionClose":{"xpathparams": [],"testStepDescription":"Close the session"}}]},
+						{"clickElement" : [{"sessionClose":{"xpathparams": [],"testStepDescription":"Close the session"}}]},
+						{"clickElement" : [{"sessionClose":{"xpathparams": [],"testStepDescription":"Close the session"}}]},
+						{"clickElement" : [{"buttonSaveAndExit":{"xpathparams": ["Transactions"],"testStepDescription":"Click on Save and Exit on Warehouse Receipt Session"}}]}
+						
+						
+					
+				]
+			}
+		}
+		
+				
+	
+	]
+}
+

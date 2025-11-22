@@ -1,0 +1,19 @@
+ **TestResults**  685b8e27613260a316195181 2025-06-26 10:46:17,678 +0530 [main] INFO  (NavActionImpls.java:1564) - Executing Navaction sleep for JsonNode
+{"sec":"2000"}
+2025-06-26 10:46:17,679 +0530 [main] INFO  (NavActionImpls.java:1568) - Sleep Time:::2000=2000 && 685b8e27613260a316195182 2025-06-26 10:46:22,388 +0530 [main] INFO  (NavActionImpls.java:2007) - Actual::Click on Support Department Search button under Allocated Resources block in call session
+2025-06-26 10:46:22,389 +0530 [main] INFO  (NavActionImpls.java:2008) - Expected::Click on Support Department Search button under Allocated Resources block in call session
+2025-06-26 10:46:22,389 +0530 [main] INFO  (NavActionImpls.java:2009) - Clicked on Element found, status : [PASSED] && 685b8e27613260a316195183 2025-06-26 10:46:25,003 +0530 [main] INFO  (NavActionImpls.java:2007) - Actual::Click on check box  to select the filtered Record of Service office in Service offices popup window
+2025-06-26 10:46:25,004 +0530 [main] INFO  (NavActionImpls.java:2008) - Expected::Click on check box  to select the filtered Record of Service office in Service offices popup window
+2025-06-26 10:46:25,004 +0530 [main] INFO  (NavActionImpls.java:2009) - Clicked on Element found, status : [PASSED] && 685b8e27613260a316195184 2025-06-26 10:46:28,662 +0530 [main] INFO  (NavActionImpls.java:2007) - Actual::Click on Ok Button in Service offices popup window
+2025-06-26 10:46:28,662 +0530 [main] INFO  (NavActionImpls.java:2008) - Expected::Click on Ok Button in Service offices popup window
+2025-06-26 10:46:28,663 +0530 [main] INFO  (NavActionImpls.java:2009) - Clicked on Element found, status : [PASSED] && 685b8e27613260a316195185 2025-06-26 10:46:33,666 +0530 [main] INFO  (NavActionImpls.java:2007) - Actual::Click on Support Engineer Search button under Allocated Resources block in call session
+2025-06-26 10:46:33,667 +0530 [main] INFO  (NavActionImpls.java:2008) - Expected::Click on Support Engineer Search button under Allocated Resources block in call session
+2025-06-26 10:46:33,667 +0530 [main] INFO  (NavActionImpls.java:2009) - Clicked on Element found, status : [PASSED] && 685b8e27613260a316195186 2025-06-26 10:46:41,104 +0530 [main] INFO  (NavActionImpls.java:2007) - Actual::Click on check box  to select filtered Record of Service-Employee  in Employees - Service popup window
+2025-06-26 10:46:41,104 +0530 [main] INFO  (NavActionImpls.java:2008) - Expected::Click on check box  to select filtered Record of Service-Employee  in Employees - Service popup window
+2025-06-26 10:46:41,104 +0530 [main] INFO  (NavActionImpls.java:2009) - Clicked on Element found, status : [PASSED] && 685b8e27613260a316195187 2025-06-26 10:46:53,919 +0530 [main] INFO  (NavActionImpls.java:2007) - Actual::Clicked on Ok Button in Employees - Service popup window
+2025-06-26 10:46:53,920 +0530 [main] INFO  (NavActionImpls.java:2008) - Expected::Clicked on Ok Button in Employees - Service popup window
+2025-06-26 10:46:53,920 +0530 [main] INFO  (NavActionImpls.java:2009) - Clicked on Element found, status : [PASSED] && 685b8e27613260a316195188 2025-06-26 10:47:15,495 +0530 [main] INFO  (NavActionImpls.java:2007) - Actual::Click on Save button to save the call Session
+2025-06-26 10:47:15,496 +0530 [main] INFO  (NavActionImpls.java:2008) - Expected::Click on Save button to save the call Session
+2025-06-26 10:47:15,496 +0530 [main] INFO  (NavActionImpls.java:2009) - Clicked on Element found, status : [PASSED] && 685b8e27613260a316195189 2025-06-26 10:47:22,220 +0530 [main] INFO  (ValidateActionImpl.java:387) - Actual Value:Validate the status changed to Assigned
+2025-06-26 10:47:22,221 +0530 [main] INFO  (ValidateActionImpl.java:388) - Expected Value:Validate the status changed to Assigned
+2025-06-26 10:47:22,221 +0530 [main] INFO  (ValidateActionImpl.java:389) - Element is Present, status : [PASSED] && 

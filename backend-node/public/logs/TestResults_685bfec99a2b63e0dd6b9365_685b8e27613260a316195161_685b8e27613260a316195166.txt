@@ -1,0 +1,21 @@
+ **TestResults**  685b8e27613260a316195167 2025-06-26 10:45:21,206 +0530 [main] INFO  (ValidateActionImpl.java:362) - Actual Value:Validate Service Menu is displayed
+2025-06-26 10:45:21,207 +0530 [main] INFO  (ValidateActionImpl.java:363) - Expected Value:Validate Service Menu is displayed
+2025-06-26 10:45:21,207 +0530 [main] INFO  (ValidateActionImpl.java:364) - Element is Displayed, status : [PASSED]
+2025-06-26 10:45:21,304 +0530 [main] INFO  (ValidateActionImpl.java:362) - Actual Value:Validate Service Menu is displayed
+2025-06-26 10:45:21,305 +0530 [main] INFO  (ValidateActionImpl.java:363) - Expected Value:Validate Service Menu is displayed
+2025-06-26 10:45:21,305 +0530 [main] INFO  (ValidateActionImpl.java:364) - Element is Displayed, status : [PASSED] && 685b8e27613260a316195167 2025-06-26 10:45:21,206 +0530 [main] INFO  (ValidateActionImpl.java:362) - Actual Value:Validate Service Menu is displayed
+2025-06-26 10:45:21,207 +0530 [main] INFO  (ValidateActionImpl.java:363) - Expected Value:Validate Service Menu is displayed
+2025-06-26 10:45:21,207 +0530 [main] INFO  (ValidateActionImpl.java:364) - Element is Displayed, status : [PASSED]
+2025-06-26 10:45:21,304 +0530 [main] INFO  (ValidateActionImpl.java:362) - Actual Value:Validate Service Menu is displayed
+2025-06-26 10:45:21,305 +0530 [main] INFO  (ValidateActionImpl.java:363) - Expected Value:Validate Service Menu is displayed
+2025-06-26 10:45:21,305 +0530 [main] INFO  (ValidateActionImpl.java:364) - Element is Displayed, status : [PASSED] && 685b8e27613260a316195168 2025-06-26 10:45:24,361 +0530 [main] INFO  (NavActionImpls.java:2007) - Actual::Click on Service Menu
+2025-06-26 10:45:24,362 +0530 [main] INFO  (NavActionImpls.java:2008) - Expected::Click on Service Menu
+2025-06-26 10:45:24,363 +0530 [main] INFO  (NavActionImpls.java:2009) - Clicked on Element found, status : [PASSED] && 685b8e27613260a316195169 2025-06-26 10:45:25,328 +0530 [main] INFO  (ValidateActionImpl.java:387) - Actual Value:Validate Call Management option is present under Service Menu
+2025-06-26 10:45:25,328 +0530 [main] INFO  (ValidateActionImpl.java:388) - Expected Value:Validate Call Management option is present under Service Menu
+2025-06-26 10:45:25,328 +0530 [main] INFO  (ValidateActionImpl.java:389) - Element is Present, status : [PASSED] && 685b8e27613260a31619516a 2025-06-26 10:45:27,487 +0530 [main] INFO  (NavActionImpls.java:2007) - Actual::Click on Call Management under Service
+2025-06-26 10:45:27,488 +0530 [main] INFO  (NavActionImpls.java:2008) - Expected::Click on Call Management under Service
+2025-06-26 10:45:27,489 +0530 [main] INFO  (NavActionImpls.java:2009) - Clicked on Element found, status : [PASSED] && 685b8e27613260a31619516b 2025-06-26 10:45:30,026 +0530 [main] INFO  (NavActionImpls.java:2007) - Actual::Click on Call Overview under Call Management
+2025-06-26 10:45:30,027 +0530 [main] INFO  (NavActionImpls.java:2008) - Expected::Click on Call Overview under Call Management
+2025-06-26 10:45:30,027 +0530 [main] INFO  (NavActionImpls.java:2009) - Clicked on Element found, status : [PASSED] && 685b8e27613260a31619516c 2025-06-26 10:45:31,650 +0530 [main] INFO  (ValidateActionImpl.java:387) - Actual Value:Validate Call Overview  session Tab is present
+2025-06-26 10:45:31,650 +0530 [main] INFO  (ValidateActionImpl.java:388) - Expected Value:Validate Call Overview  session Tab is present
+2025-06-26 10:45:31,650 +0530 [main] INFO  (ValidateActionImpl.java:389) - Element is Present, status : [PASSED] && 
