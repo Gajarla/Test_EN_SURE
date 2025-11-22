@@ -1,1 +1,42 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Build Frontend') {
+            steps {
+                dir('frontend') {
+                    sh "npm ci"
+                    sh "npm run build"
+                }
+            }
+        }
+
+        stage('Build Backend') {
+            steps {
+                dir('backend-node') {
+                    sh "npm ci"
+                }
+            }
+        }
+
+        stage('Deploy Frontend') {
+            steps {
+                sh "bash jenkins/deployment-scripts/deploy-frontend.sh"
+            }
+        }
+
+        stage('Deploy Backend NodeJS') {
+            steps {
+                sh "bash jenkins/deployment-scripts/deploy-backend-node.sh"
+            }
+        }
+    }
+}
 
